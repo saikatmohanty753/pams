@@ -173,6 +173,10 @@ Route::prefix('task-updates')->controller(TaskActivityController::class)->middle
 
 Route::controller(DashboardController::class)->middleware(['auth'])->group(function(){
     Route::get('/dashboard','index');
+    Route::get('project-status-graph','projectStatus')->name('project-status-graph');
+    Route::get('dept-wise-task','deptWiseTask')->name('dept-wise-task');
+    Route::get('task-wise-updates','taskWiseUpdate')->name('task-wise-updates');
+    Route::get('total-count-task','totalCount')->name('total-count-task');
 });
 
 Route::prefix('reports')->controller(ReportsController::class)->middleware(['auth'])->group(function(){
