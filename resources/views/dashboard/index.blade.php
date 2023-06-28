@@ -26,6 +26,7 @@ canvas#processChart, canvas#myChart {min-height:200px; max-height: 210px; }
         @include('alert_message')
     </div>
 </div>
+
 <div id="main-wrapper">
     <div class="maxh-42vh w-100 all-tasks">
         <div id="total-count"></div>
