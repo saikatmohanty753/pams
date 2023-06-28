@@ -8,6 +8,7 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
+        $task_details = array();
         return view('dashboard.index');
     }
     /*********************************************
@@ -23,7 +24,6 @@ class DashboardController extends Controller
     {
         return response()->json([view('dashboard.project_status')->render()]);
     }
-
     public function deptWiseTask(Request $request)
     {
         return response()->json([view('dashboard.dept_task')->render()]);
