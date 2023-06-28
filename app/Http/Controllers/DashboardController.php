@@ -9,6 +9,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $task_details = array();
+
         return view('dashboard.index');
     }
     /*********************************************
