@@ -1,7 +1,7 @@
 @extends('./layout/main')
 @section('content')
 @php
-  $status = array('1' => 'Active', '2'=>'In-Active');  
+  $status = array('1' => 'Active', '2'=>'In-Active');
   $tiers = array('1' => 'Tier - 1', '2'=>'Tier - 2','3'=>'Tier - 3');
 @endphp
 <div class="page-title">
@@ -24,11 +24,11 @@
                 <div class="row">
                     <div class="col-md-3">
                         <label for="first_name">First Name <span style="color: red">*</span></label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter first name" autocomplete="off" value="{{ @$usersdata->first_name }}" required>
+                        <input type="text" class="form-control alpha" name="first_name" id="first_name" placeholder="Enter first name" autocomplete="off" value="{{ @$usersdata->first_name }}" required>
                     </div>
                     <div class="col-md-3">
                         <label for="last_name">Last Name <span style="color: red">*</span></label>
-                        <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter last name" autocomplete="off" value="{{ @$usersdata->last_name }}" required>
+                        <input type="text" name="last_name alpha" class="form-control" id="last_name" placeholder="Enter last name" autocomplete="off" value="{{ @$usersdata->last_name }}" required>
                     </div>
                     <div class="col-md-3">
                         <label for="emp_code">Employee Code <span style="color: red">*</span></label>
@@ -45,7 +45,7 @@
                             @endif
                         </select>
                     </div>
-                    
+
                     <div class="col-md-3">
                         <label for="dob">Birthday date <span style="color: red">*</span></label>
                         <input type="date" name="dob" value="{{ @$usersdata->dob }}" class="form-control" id="dob" autocomplete="off" required>
@@ -87,10 +87,10 @@
                                 @endif
                             @endif
                         </select>
-                    </div>   
+                    </div>
                 </div>
                 <div class="row">
-                    
+
                     <div class="col-md-3">
                         <label for="email">Email <span style="color: red">*</span></label>
                         <input type="email" name="email" value="{{ @$usersdata->email }}" class="form-control" id="email" placeholder="Enter email" autocomplete="off" required>

@@ -6,13 +6,13 @@
     }
 </style>
 @php
-  $status = array('1' => 'Active', '2'=>'In-Active');  
+  $status = array('1' => 'Active', '2'=>'In-Active');
   $departments = getTableAll('departments',[['is_active',1],['id','!=',7]]);
   $subdepartments = getTableAll('sub_departments',[['is_active',1],['dept_id',3]]);
 @endphp
 <div class="page-title">
     <h3 class="breadcrumb-header"> Projects</h3>
-</div> 
+</div>
 
 @can('project-create')
 <div id="main-wrapper">
@@ -27,19 +27,19 @@
                     </div>
                     <div class="col-md-4">
                         <label for="estimate_start_date">Estimate Start Date <span style="color: red">*</span></label>
-                        <input type="date" class="form-control" name="estimate_start_date" id="estimate_start_date" placeholder="Enter project name" autocomplete="off" required>
+                        <input type="date" class="form-control" name="estimate_start_date" id="estimate_start_date" placeholder="Enter project name" onchange="dateValid('estimate_start_date','estimate_end_date')" autocomplete="off" required>
                     </div>
                     <div class="col-md-4">
                         <label for="estimate_end_date">Estimate End Date <span style="color: red">*</span></label>
-                        <input type="date" class="form-control" name="estimate_end_date" id="estimate_end_date" placeholder="Enter project name" autocomplete="off" required>
+                        <input type="date" class="form-control" name="estimate_end_date" id="estimate_end_date" placeholder="Enter project name" autocomplete="off" onchange="dateValid('estimate_start_date','estimate_end_date')" required>
                     </div>
                     <div class="col-md-4">
                         <label for="actual_start_date">Actual Start Date</label>
-                        <input type="date" class="form-control" name="actual_start_date" id="actual_start_date" placeholder="Enter project name" autocomplete="off">
+                        <input type="date" class="form-control" onchange="dateValid('actual_start_date','actual_end_date')" name="actual_start_date" id="actual_start_date" placeholder="Enter project name" autocomplete="off">
                     </div>
                     <div class="col-md-4">
                         <label for="actual_end_date">Actual End Date</label>
-                        <input type="date" class="form-control" name="actual_end_date" id="actual_end_date" placeholder="Enter project name" autocomplete="off" >
+                        <input type="date" class="form-control" onchange="dateValid('actual_start_date','actual_end_date')" name="actual_end_date" id="actual_end_date" placeholder="Enter project name" autocomplete="off" >
                     </div>
                     <div class="col-md-4">
                         <label for="is_active">Status <span style="color: red">*</span></label>
