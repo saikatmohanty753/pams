@@ -143,6 +143,7 @@ class UsersController extends Controller
 
     public function updateProfile(Request $request)
     {
+        $fileName = '';
         if($request->method() == 'POST')
         {
             $user = User::where('id',Auth::user()->id)->where('is_active',1)->first();
