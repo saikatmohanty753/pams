@@ -23,7 +23,6 @@ class DashboardController extends Controller
     {
         return response()->json([view('dashboard.project_status')->render()]);
     }
-
     public function deptWiseTask(Request $request)
     {
         return response()->json([view('dashboard.dept_task')->render()]);
