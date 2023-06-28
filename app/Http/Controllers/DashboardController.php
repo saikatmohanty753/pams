@@ -28,8 +28,6 @@ class DashboardController extends Controller
     {
         return response()->json([view('dashboard.dept_task')->render()]);
     }
-
-    // jik
     public function taskWiseUpdate(Request $request)
     {
         return response()->json([view('dashboard.task_updates')->render()]);
