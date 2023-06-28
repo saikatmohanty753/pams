@@ -10,7 +10,6 @@ class DashboardController extends Controller
     {
         return view('dashboard.index');
     }
-
     /*********************************************
      * Project Status graph
      * Date - 28-06-2023
