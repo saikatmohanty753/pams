@@ -56,8 +56,8 @@
                         </div>
                         <p>{{ $task_details->task_description }}</p>
                         @if(isset($task_reopens) && count($task_reopens) > 0)
-                        <h5>Reopen descriptions</h5>   
-                        <ol>      
+                        <h5>Reopen descriptions</h5>
+                        <ol>
                         @foreach($task_reopens as $tsk_reopen)
                         <li><p>{{ ((Auth::user()->id == $tsk_reopen->created_by)?'You':getUserName($tsk_reopen->created_by)).' : '.$tsk_reopen->reopen_remark }}</p></li>
                         @endforeach
@@ -65,7 +65,7 @@
                         @endif
                         <hr/>
                         <div class="d-flex">
-                            
+
                             @if($task_details->is_complete == 0)
                             @if(in_array(Auth::user()->id,$task_assigns_ids))
                             <button type="button" class="btn btn-success mx-1" id="start_task" onclick="startTask('{{ $task_details->id }}')">START</button>
@@ -75,7 +75,7 @@
                             @if($task_details->is_complete == 3 && Auth::user()->id == $task_details->created_by)
                             <button type="button" class="btn btn-info mx-1" data-target="#myReopenModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" id="reopen_task">RE-OPEN</button>
                             @include('../includes/reopen_task_modal')
-                            
+
                             @endif
 
                             @if($task_details->end_date > date('Y-m-d h:i:s'))
@@ -97,7 +97,7 @@
                             @elseif($task_details->created_by == Auth::user()->id)
                             <button type="button" class="btn btn-success mx-1" onclick="finishTask('{{ $task_details->id }}')" id="finish_task">FINISH</button>
                             @endif
-                            
+
                             @endif
 
                             @else
@@ -112,7 +112,7 @@
                             <button type="button" class="btn btn-success mx-1" onclick="finishTask('{{ $task_details->id }}')" id="finish_task">FINISH</button>
 
                             @endif
-                                
+
                             @endif
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-1 col-xs-2">
                                         <img src="{{ asset('assets/images/dummy-profile-pic.jpg') }}" class="img-circle media-object" style="width:40px">
-                                    </div>                                                
+                                    </div>
                                     <div class="col-sm-11 col-xs-10">
                                         <textarea class="form-control input-rounded" id="input-rounded"></textarea>
                                     </div>
@@ -183,7 +183,7 @@
 
                                                 @if(Auth::user()->id == $task_details->created_by)
                                                 <td width="5%">
-                                                    <a href="javascript:;" style="text-decoration: none;float: right;margin-top: 15px" title="Edit time elapsed" onclick="getTimeUpdateElapsed('{{ $task_details->project_id }}','{{ $task_details->id }}','{{ $time_elps->id }}','{{ $time_elps->start_date }}','{{ $time_elps->end_date }}','{!! $time_elps->remark !!}','time-elapsed{{ $time_elps->id }}')"><span class="icon-pencil"></span></a> 
+                                                    <a href="javascript:;" style="text-decoration: none;float: right;margin-top: 15px" title="Edit time elapsed" onclick="getTimeUpdateElapsed('{{ $task_details->project_id }}','{{ $task_details->id }}','{{ $time_elps->id }}','{{ $time_elps->start_date }}','{{ $time_elps->end_date }}','{!! $time_elps->remark !!}','time-elapsed{{ $time_elps->id }}')"><span class="icon-pencil"></span></a>
                                                 </td>
                                                 @endif
                                             </tr>
@@ -192,7 +192,11 @@
                                 </div>
                             @endforeach
                             @endif
-                            @if($task_details->is_complete != 4)
+                            @php
+                                $update_time = '06:30 PM';
+                                $dateTime = new DateTime($update_time);
+                            @endphp
+                            @if($task_details->is_complete !=  4 && ($dateTime->diff(new DateTime)->format('%R') == '+' || Auth::user()->is_allowed_time_elapsed == 1))
                                 <div class="clearfix" id="tspl-time"></div>
                                 <div id="time_elapse_save_div" @if($time_elapsed_check->exists()) style="display:none" @endif>
                                     <input type="hidden" id="time_els_id" />
@@ -212,7 +216,7 @@
                                 @endif
                             </div>
                         </div>
-                    </div>                                
+                    </div>
                 </div>
             </div>
 
@@ -227,7 +231,7 @@
                             <div class="col-sm-6">Deadline</div>
                             <div class="col-sm-6" style="text-decoration: dashed;">
                                 <a href="#" class="link-dashed">{{ date('d-m-Y',strtotime($task_details->end_date)) }}</a>
-                            </div>                                    
+                            </div>
                         </div>
                         <hr>
                         <div class="alert alert-success" role="alert">@if(!empty($task_details->task_description)) {{ $task_details->task_description }} @else Require task status summary. @endif</div>
@@ -239,7 +243,7 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-xs-2">
                                         <img src="{{ asset('assets/images/dummy-profile-pic.jpg') }}" class="img-circle media-object" style="width:40px">
-                                    </div>                                                
+                                    </div>
                                     <div class="col-sm-10 col-xs-10">
                                         <H4><a href="#">{{ getUserName($task_details->created_by) }}</a></H4>
                                     </div>
@@ -252,7 +256,7 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-xs-2">
                                         <img src="{{ asset('assets/images/dummy-profile-pic.jpg') }}" class="img-circle media-object" style="width:40px">
-                                    </div>                                                
+                                    </div>
                                     <div class="col-sm-10 col-xs-10">
                                         <H4><a href="#">{{ getUserName($task_details->responsible_person) }}</a></H4>
                                     </div>
@@ -267,7 +271,7 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-xs-2">
                                         <img src="{{ asset('assets/images/dummy-profile-pic.jpg') }}" class="img-circle media-object" style="width:40px">
-                                    </div>                                                
+                                    </div>
                                     <div class="col-sm-10 col-xs-10">
                                         <H4><a href="#">{{ getUserName($assign->assign_user_id) }}</a></H4>
                                     </div>
@@ -284,7 +288,7 @@
                                 <div class="row">
                                     <div class="col-sm-2 col-xs-2">
                                         <img src="{{ asset('assets/images/dummy-profile-pic.jpg') }}" class="img-circle media-object" style="width:40px">
-                                    </div>                                                
+                                    </div>
                                     <div class="col-sm-10 col-xs-10">
                                         <H4><a href="#">{{ getUserName($observe->observer_user_id) }}</a></H4>
                                     </div>

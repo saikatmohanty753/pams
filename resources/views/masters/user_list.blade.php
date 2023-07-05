@@ -4,6 +4,8 @@
  $departmentList = getPluck('departments',['is_active'=>1],'id','name');
 @endphp
 @can('user-list')
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <div class="panel panel-white">
     <div class="panel-body">
         <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
@@ -30,6 +32,7 @@
                                         <th>Reporting Designation</th>
                                         <th>User Tier</th>
                                         <th>Status</th>
+                                        <th>Is time elapsed allowed ?</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -47,6 +50,13 @@
                                         <td>{{ tierStatus($user->tier_user) }}</td>
                                         <td>{{ $status[$user->is_active] }}</td>
                                         <td>
+                                            @if($user->is_allowed_time_elapsed == 1)
+                                            <input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" onchange="usrAllowTimeElapsed('{{ $user->id }}')">
+                                            @else
+                                            <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" onchange="usrAllowTimeElapsed('{{ $user->id }}')">
+                                            @endif
+                                        </td>
+                                        <td>
                                             @can('user-edit')
                                             <a href="{{ route('edit-user',[encrypt($user->id)])}}" class="btn btn-rss m-b-xs space-button" title="Edit"><span class="icon-note"></span> Edit</a>
                                             @endcan
@@ -54,7 +64,6 @@
                                             @can('user-delete')
                                             <a href="{{ route('delete-user',[encrypt($user->id)])}}" class="btn btn-danger m-b-xs space-button" title="Edit" onclick="return confirm('Are you sure ?')"><span class="icon-trash"></span> Delete</a>
                                             @endcan
-
                                         </td>
                                     </tr>
                                     @endforeach
@@ -68,4 +77,25 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function usrAllowTimeElapsed(key)
+{
+    if(key != '')
+    {
+        $.ajax({
+            url:"{{ route('allow-time-user') }}",
+            type:"POST",
+            data:{"_token":"{{ csrf_token() }}","key":key},
+            dataType:"JSON",
+            success:function(res)
+            {
+                if(res.status == 0)
+                {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+}
+</script>
 @endcan

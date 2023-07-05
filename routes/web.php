@@ -37,6 +37,7 @@ Route::get('/', function () {
     {
         return redirect('/dashboard');
     }
+
     return view('users.login');
 });
 
@@ -45,6 +46,7 @@ Route::get('/login', function () {
     {
         return redirect('/dashboard');
     }
+
     return view('users.login');
 });
 
@@ -72,6 +74,7 @@ Route::controller(UsersController::class)->group(function(){
         Route::get('edit-user/{id?}','updateUser')->middleware('can:user-edit')->name('edit-user');
         Route::post('update-user','updateUser')->middleware('can:user-edit')->name('update-user');
         Route::get('delete-user/{id?}','deleteUser')->middleware('can:user-delete')->name('delete-user');
+        Route::post('allow-time-user','usrAllowTimeElapsed')->name('allow-time-user');
 
         /* Change Password */
         Route::get('change-password','changePassword')->name('change-password');

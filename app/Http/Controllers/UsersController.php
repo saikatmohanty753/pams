@@ -350,5 +350,30 @@ class UsersController extends Controller
             }
         }
     }
-
+    public function usrAllowTimeElapsed(Request $request)
+    {
+        if(!empty($request->key))
+        {
+            $user = User::where('id',$request->key);
+            if($user->exists())
+            {
+                $user = $user->first();
+                if($user->is_allowed_time_elapsed == 1)
+                {
+                    $user->is_allowed_time_elapsed = 0;
+                    if($user->update()){
+                        return response()->json(['status'=>1]);
+                    }
+                }
+                if($user->is_allowed_time_elapsed == 0)
+                {
+                    $user->is_allowed_time_elapsed = 1;
+                    if($user->update()){
+                        return response()->json(['status'=>1]);
+                    }
+                }
+            }
+        }
+        return response()->json(['status'=>0]);
+    }
 }
