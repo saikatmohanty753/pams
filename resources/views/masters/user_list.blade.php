@@ -4,8 +4,8 @@
  $departmentList = getPluck('departments',['is_active'=>1],'id','name');
 @endphp
 @can('user-list')
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<link href="{{ asset('assets/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/bootstrap-toggle.min.js') }}"></script>
 <div class="panel panel-white">
     <div class="panel-body">
         <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
